@@ -61,13 +61,7 @@
                  $keyword = $_GET["keyword"];
                  $semuadata=array();
                  $ambil = $koneksi->query("SELECT * FROM barang WHERE nama_barang LIKE '%$keyword%' OR brand LIKE '%$keyword%'");
-                //  while($pecah = $ambil->fetch_assoc())
-                //  {
-                //      $semuadata[]=$pecah;
-                //  }
-                //  echo "<pre>";
-                //  print_r($semuadata);
-                //  echo "</pre>"; 
+
             ?>
             <div id="kanan" style="width: auto;">
 
