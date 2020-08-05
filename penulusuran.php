@@ -78,7 +78,7 @@
                      <!-- foreach ($semuadata as $key => $value) {
                          echo 'Data = '. $value[''];
                      } -->
-                    <ul>
+                    <ul style="padding-left: 120px;">
                         <?php while($pecah = $ambil->fetch_assoc()) { ?>
                           
                             <li>

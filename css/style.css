@@ -254,7 +254,7 @@ body{
 #kanan #frame-barang ul {
     list-style: none;
     margin: 0px;
-    padding-left: 120px;
+    padding: 0px;
     overflow: hidden;
 }
 
