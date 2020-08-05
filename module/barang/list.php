@@ -15,7 +15,7 @@
                 <input type="hidden" name="page" value="<?php echo $_GET["page"] ?>" />
                 <input type="hidden" name="module" value="<?php echo $_GET["module"] ?>" />
                 <input type="hidden" name="action" value="<?php echo $_GET["action"] ?>" />
-                <input type="text" name="search" value="<?php echo $search; ?>" size="40px" placeholder="Ketikan Nama Barang dan Kategori"/>
+                <input type="text" name="search" value="<?php echo $search; ?>" size="40px" placeholder="Ketikan Nama Barang atau Kategori"/>
                 <input type="submit" value="Search" />
         </form>
     </div>
