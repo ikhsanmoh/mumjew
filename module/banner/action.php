@@ -20,21 +20,35 @@
         $edit_gambar  = ", gambar='$nama_file'";
     }
      
-    if($button == "Add")
-    {
-        mysqli_query($koneksi, "INSERT INTO banner (banner, link, gambar, status) VALUES ('$banner', '$link', '$nama_file', '$status')");
-    }
-    elseif($button == "Update"){
+    if($button == "Add"){
+        $query = mysqli_query($koneksi, "SELECT * FROM banner WHERE link='$link'");
+        if(mysqli_num_rows($query) == 1){
+            header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=form&notif=nlink&notif=gagal_add");
+            die();    
+        } else {
+        mysqli_query($koneksi, "INSERT INTO banner (banner, link, gambar, status) VALUES ('$banner', '$link', '$nama_file', '$status')"); 
+        }
+    }elseif($button == "Update"){
+        $query = mysqli_query($koneksi, "SELECT * FROM banner WHERE link='$link'");
+        if(mysqli_num_rows($query) == 1){
+            header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=form&notif=nlink&notif=gagal_update");
+            die();    
+        } else {
         mysqli_query($koneksi, "UPDATE banner SET banner='$banner',
                                         link='$link',
                                         $edit_gambar
                                         status='$status'
-										$edit_gambar WHERE banner_id='$banner_id'");
-    }
+                                        $edit_gambar WHERE banner_id='$banner_id'");
+        header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=list&notif=nlink&notif=sukses_update");
+        die();                                 
+        }
+    }    
     else if($button == "Delete"){
-		mysqli_query($koneksi, "DELETE FROM banner WHERE banner_id='$banner_id'");
+        mysqli_query($koneksi, "DELETE FROM banner WHERE banner_id='$banner_id'");
+        header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=list&notif=nlink&notif=sukses_delete");
+            die(); 
 	}
      
      
-    header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=list");
+    header("location: ".BASE_URL."index.php?page=my_profile&module=banner&action=list&notif=sukses_add");
 ?>

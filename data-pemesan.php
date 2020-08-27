@@ -48,8 +48,8 @@
         <div class="element-form">
             <label>Metode Pembayaran</label>
             <span>
-                <input type="radio" name="metode_pembayaran" value="COD" />COD
-                <input type="radio" name="metode_pembayaran" value="Transfer" />Transfer
+                <input type="radio" name="metode_pembayaran" value="cod" />COD
+                <input type="radio" name="metode_pembayaran" value="transfer" />Transfer
             </span>
         </div>
 

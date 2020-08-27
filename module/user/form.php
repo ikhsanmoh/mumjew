@@ -6,15 +6,23 @@
 	$queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE user_id='$user_id'");
 	 
 	$row=mysqli_fetch_array($queryUser);
-	  
+	
 	$nama = $row["nama"];
 	$email = $row["email"];
 	$phone = $row["phone"];
 	$alamat = $row["alamat"];
 	$status = $row["status"];
 	$level = $row["level"];
+	// var_dump($nama, $email, $phone, $alamat, $status, $level."<br>"."<br>". $user_id); die();
+	
 ?>
 <form action="<?php echo BASE_URL."module/user/action.php?user_id=$user_id"?>" method="POST">
+
+	<?php
+		if (isset($_GET['notif'])) {
+			echo notifTransaksi($_GET['notif'] ,"Email");
+		}
+	?>
 	  
 	<div class="element-form">
 		<label>Nama Lengkap</label>	

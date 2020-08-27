@@ -89,4 +89,35 @@ function pagination($query, $data_per_halaman, $pagination, $url){
     echo "</ul>";
 }
 
+// Fungsi Untuk Notifikasi Setelah Melakukan CRUD
+function notifTransaksi($notifStatus = false, $ket = "Data") {
+    
+    if (!$notifStatus || $notifStatus === null) {
+        return;
+    }
+
+    // Cek jika var notif pada url tersedia
+    if ($notifStatus) {
+
+        $hasil ="";
+        $kondisi = array(
+            "sukses_add" => "Berhasil menginput ".$ket,
+            "gagal_add" => "Gagal menginput ".$ket.", ".$ket." tidak boleh sama!",
+            "sukses_update" => "Berhasil memperbaharui ".$ket,
+            "gagal_update" => "Gagal memperbaharui ".$ket.", ".$ket." tidak boleh sama!",
+            "sukses_delete" => "Berhasil menghapus ".$ket
+        );
+        
+        foreach ($kondisi as $key => $value) {
+            // Pengkondisian untuk menampilkan tipe notif
+            if ($notifStatus == $key) {
+                $hasil = "<div class='notif' id='notif'>".$value."</div>";
+            }
+        }
+
+    }
+
+    return $hasil;
+}
+
 ?>

@@ -2,7 +2,7 @@
 	
 	$pesanan_id= $_GET["pesanan_id"];
 	
-	$query = mysqli_query($koneksi, "SELECT pesanan.nama_penerima, pesanan.nomor_telepon, pesanan.alamat, pesanan.tanggal_pemesanan, user.nama, kota.kota, kota.tarif FROM pesanan JOIN user ON pesanan.user_id=user.user_id JOIN kota ON kota.kota_id=pesanan.kota_id WHERE pesanan.pesanan_id='$pesanan_id'");
+	$query = mysqli_query($koneksi, "SELECT pesanan.metode_pembayaran, pesanan.nama_penerima, pesanan.nomor_telepon, pesanan.alamat, pesanan.tanggal_pemesanan, user.nama, kota.kota, kota.tarif FROM pesanan JOIN user ON pesanan.user_id=user.user_id JOIN kota ON kota.kota_id=pesanan.kota_id WHERE pesanan.pesanan_id='$pesanan_id'");
 	
 	$row=mysqli_fetch_assoc($query);
 	
@@ -13,6 +13,7 @@
 	$tarif = $row['tarif'];
 	$nama = $row['nama'];
 	$kota = $row['kota'];
+	$mtd_pembayaran = $row['metode_pembayaran'];
 	
 ?>
 
@@ -53,7 +54,12 @@
 			<td>Tanggal Pemesanan</td>
 			<td>:</td>
 			<td><?php echo $tanggal_pemesanan; ?></td>
-		</tr>		
+		</tr>
+		<tr>
+			<td>Metode Pembayaran</td>
+			<td>:</td>
+			<td><?php echo $mtd_pembayaran; ?></td>
+		</tr>			
 	</table>	
 </div>	
 
@@ -107,10 +113,17 @@
 	</table>
 	
 <div id="frame-keterangan-pembayaran">
-	<p>
-	   Silahkan lakukan pembayaran ke Bank ABC<br/>
-	   Nomor Account : 0000-9999-8888 (A/N Weshop).<br/>
-	   Setelah melakukan pembayaran silahkan lakukan konfirmasi pembayaran
-	   <a href="<?php echo BASE_URL."index.php?page=my_profile&module=pesanan&action=konfirmasi_pembayaran&pesanan_id=$pesanan_id"?>">Disini</a>.
-	</p>
+	<?php if ($mtd_pembayaran == "cod") :?>
+		<p>
+			Silahkan konfirmasi pembayaran jika sudah menyelesaikan transaksi
+			<a href="<?php echo BASE_URL."module/pesanan/action.php?pesanan_id=$pesanan_id&button=konfirmasi_cod"?>">Konfirmasi</a>.
+		</p>
+	<?php elseif($mtd_pembayaran == "transfer") :?>
+		<p>
+			Silahkan lakukan pembayaran ke Bank ABC<br/>
+			Nomor Account : 0000-9999-8888 (D/W Mumtaza).<br/>
+			Setelah melakukan pembayaran silahkan lakukan konfirmasi pembayaran
+			<a href="<?php echo BASE_URL."index.php?page=my_profile&module=pesanan&action=konfirmasi_pembayaran&pesanan_id=$pesanan_id"?>">Disini</a>.
+		</p>
+	<?php endif; ?>
 </div>	

@@ -271,7 +271,7 @@ body{
     font-size: 15px;
     font-weight: bold;
     text-align: right;
-    margin-bottom: 10px;
+    margin-bottom: unset;
     display: inline-block;
 }
 
@@ -279,7 +279,7 @@ body{
     font-size: 15px;
     font-weight: bold;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: unset;
     padding-right: 50px;
     display: inline-block;
 }
@@ -485,4 +485,12 @@ ul.pagination li a.active {
 .label-password {
     display: flex;
     justify-content: space-between;
+}
+
+#kanan #frame-barang ul li .priced {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: unset;
+    color: #08a164;
 }

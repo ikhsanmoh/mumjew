@@ -22,6 +22,13 @@
         </form>
     </div>
 </div>
+
+    <?php
+		if (isset($_GET['notif'])) {
+			echo notifTransaksi($_GET['notif'] ,"User");
+		}
+	?>
+
 <?php
 
     $pagination = isset($_GET["pagination"]) ? $_GET["pagination"] : 1;

@@ -25,6 +25,27 @@
 </div>
 
 <?php
+    // Cek jika var notif pada url tersedia
+    if (isset($_GET['notif'])) {
+        
+        // Pengkondisian untuk menampilkan tipe notif
+        if ($_GET['notif'] == "sukses_add") {
+            echo "<div class='notif' id='notif'>Data berhasil dimasukkan!</div>";
+        } elseif ($_GET['notif'] == "sukses_update") {
+            echo "<div class='notif' id='notif'>Data berhasil diperbaharui!</div>";
+        } elseif ($_GET['notif'] == "sukses_delete") {
+            echo "<div class='notif' id='notif'>Data berhasil dihapus!</div>";
+        } 
+    }
+?>
+
+<?php
+    if (isset($_GET['notif']) && $_GET['notif'] == "sukses") {
+        echo "<div class='notif' id='notif'>Data berhasil dimasukkan!</div>";
+    }
+?>
+
+<?php
 
     $pagination = isset($_GET["pagination"]) ? $_GET["pagination"] : 1;
     $data_per_halaman = 5;
@@ -43,6 +64,7 @@
                 <th class='kiri'>Barang</th>
                 <th class='kiri'>Kategori </th>
                 <th class='kiri'>Harga</th>
+                <th class='kiri'>Harga Distributor</th>
                 <th class='kiri'>Brand</th>
                 <th class='tengah'>Status</th>
                 <th class='tengah'>Action</th>
@@ -56,6 +78,7 @@
                     <td class='kiri'>$row[nama_barang]</td>
                     <td class='kiri'>$row[kategori]</td>
                     <td class='kiri'>".rupiah($row["harga"])."</td>
+                    <td class='kiri'>".rupiah($row["harga_distributor"])."</td>
                     <td class='kiri'>$row[brand]</td>
                     <td class='tengah'>$row[status]</td>
                     <td class='tengah'>

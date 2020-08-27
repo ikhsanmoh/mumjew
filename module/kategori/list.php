@@ -25,6 +25,29 @@
 </div>
 
 <?php
+    // Cek jika var notif pada url tersedia
+    // if (isset($_GET['notif'])) {
+        
+    //     // Pengkondisian untuk menampilkan tipe notif
+    //     if ($_GET['notif'] == "sukses_add") {
+    //         echo "<div class='notif' id='notif'>Data berhasil dimasukkan!</div>";
+    //     } elseif ($_GET['notif'] == "gagal_add") {
+    //         echo "<div class='notif' id='notif'>Data gagal dimasukkan!</div>";
+    //     } elseif ($_GET['notif'] == "sukses_update") {
+    //         echo "<div class='notif' id='notif'>Data berhasil diperbaharui!</div>";
+    //     } elseif ($_GET['notif'] == "gagal_update") {
+    //         echo "<div class='notif' id='notif'>Gagal Diperbaharui, Nama Kategori Tidak Boleh Sama!!</div>";
+    //     } elseif ($_GET['notif'] == "sukses_delete") {
+    //         echo "<div class='notif' id='notif'>Data berhasil dihapus!</div>";
+    //     } 
+    // }
+
+    if (isset($_GET['notif'])) {
+        echo notifTransaksi($_GET['notif']);
+    }
+?>
+
+<?php
 
     $pagination = isset($_GET["pagination"]) ? $_GET["pagination"] : 1;
     $data_per_halaman = 5;

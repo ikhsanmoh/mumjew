@@ -31,7 +31,7 @@
                 <td class='tengah'>$no</td>
                 <td class='kiri'><img src='".BASE_URL."images/barang/$gambar' height='100px'/></td>
                 <td class='kiri'>$nama_barang</td>
-                <td class='tengah'><input type='text' name='$barang_id' value='$quantity' class='update-quantity' /></td>
+                <td class='tengah'><input type='number' name='$barang_id' value='$quantity' class='update-quantity' /></td>
                 <td class='kanan'>".rupiah($harga)."</td>
                 <td class='kanan hapus_item'>".rupiah($total)." <a href='".BASE_URL."hapus_item.php?barang_id=$barang_id'>X</a></td>
             </tr>";

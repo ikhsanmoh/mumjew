@@ -18,4 +18,4 @@
 
     $_SESSION["keranjang"] = $keranjang;
 
-    header("location:".BASE_URL);
+    header("location:".BASE_URL."?add_status=sukses");

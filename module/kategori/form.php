@@ -17,7 +17,23 @@
 
 ?>
 <form action="<?php echo BASE_URL."module/kategori/action.php?kategori_id=$kategori_id";?>" method="POST">
+    <?php
+    // notif kategori sudah ada
+        // if (isset($_GET['notif'])) {
 
+        //     if ($_GET['notif'] == "gagal_add") {
+        //         echo "<div class='notif' id='notif'>Gagal menginput data, Nama Kategori tidak boleh sama!</div>";
+        //     } elseif ($_GET['notif'] == "gagal_update") {
+        //         echo "<div class='notif' id='notif'>Gagal Memperbaharui, Nama kategori tidak boleh sama!</div>";
+        //     }
+            
+        // }
+            
+        if ( isset($_GET['notif']) ) {
+            echo notifTransaksi($_GET['notif'], "Kategori");
+        }
+    //====///
+    ?>
     <div class="element-form">
         <label>Kategori</label>
         <span><input type="text" name="kategori" value="<?php echo $kategori; ?>" /></span>

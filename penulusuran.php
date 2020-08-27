@@ -61,7 +61,7 @@
                  $keyword = $_GET["keyword"];
                  $semuadata=array();
                  $ambil = $koneksi->query("SELECT * FROM barang WHERE nama_barang LIKE '%$keyword%' OR brand LIKE '%$keyword%'");
-
+                
             ?>
             <div id="kanan" style="width: auto;">
 
@@ -71,6 +71,7 @@
                             <button>Search</button>
                     </form>
                     <h3>Hasil Pencarian : <?php echo $keyword ?></h3>
+                  
                 </div>
 
                 <div id="frame-barang"> 
@@ -79,8 +80,17 @@
                          echo 'Data = '. $value[''];
                      } -->
                     <ul style="padding-left: 120px;">
-                        <?php while($pecah = $ambil->fetch_assoc()) { ?>
-                          
+                        <?php 
+                            if (mysqli_num_rows($ambil) == 0 ) {  
+                                echo "<h4 class='notif'><u>$keyword</u> Tidak Ditemukan!</h4>";
+                            } else {
+                        ?>
+                        <?php while($pecah = $ambil->fetch_assoc()) { 
+                                {
+                                    $semuadata[]=$pecah;
+                                }
+                                ?>
+                                  
                             <li>
                                 <div>
                                     <p class="brand"><?php echo $pecah['brand']; ?></p>
@@ -99,7 +109,7 @@
                                     <a href="<?php echo BASE_URL.'tambah_keranjang.php?barang_id='.$pecah['barang_id']; ?>">+ add to cart</a>
                                 </div>
                         
-                        <?php } ?>
+                        <?php } } ?>
                     </ul>
                         
                 </div>

@@ -69,11 +69,19 @@
                         $style="style='margin-right:0px'";
                         $no=0;
                     }
+                    
+                    // Pengkondisian untuk menampilkan harga distributor
+                    if ($level == "superadmin") {
+                        $show_harga_dist = "<p class='priced'>".rupiah($row['harga_distributor'])."</p>";
+                    } else {
+                        $show_harga_dist = "";
+                    }
 
                     echo "<li $style>
                             <div>
                             <p class='brand'>".$row['brand']."</p>
                             <p class='price'>".rupiah($row['harga'])."</p>
+                            {$show_harga_dist}
                             </div>
                             <a href='".BASE_URL."$row[barang_id]/$kategori/$barang.html'>
                                 <img src='".BASE_URL."images/barang/$row[gambar]' />

@@ -92,5 +92,25 @@
 
     </div>
 
+    <?php
+        if (isset($_GET['add_status'])) {
+            echo "
+            <script>
+            $(document).ready(function(){
+                alert('Berhasil memasukan barang ke keranjang')
+                window.history.replaceState({}, document.title, '/' + 'index.php')
+            })
+            </script>";
+        }
+    ?>
+
+<!-- JS Manual -->
+
+<script>
+
+  $('#notif').delay(3000).fadeOut(300);
+
+</script>
+
 </body>
 </html>

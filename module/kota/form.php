@@ -21,6 +21,12 @@
 ?>		
 <form action="<?php echo BASE_URL."module/kota/action.php?kota_id=$kota_id"?>" method="post">
 
+	<?php
+		if (isset($_GET['notif'])) {
+			echo notifTransaksi($_GET['notif'] ,"Kota");
+		}
+	?>
+
 	<div class="element-form">
 		<label>Kota</label>	
 		<span><input type="text" name="kota" value="<?php echo $kota; ?>" /></span>

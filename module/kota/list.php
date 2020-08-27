@@ -25,6 +25,12 @@
 </div>
 
 <?php
+    // Cek jika var notif pada url tersedia
+	if (isset($_GET['notif'])) {
+        echo notifTransaksi($_GET['notif'] ,"Kota");
+    }
+?>
+<?php
 
 	$pagination = isset($_GET["pagination"]) ? $_GET["pagination"] : 1;
 	$data_per_halaman = 10;

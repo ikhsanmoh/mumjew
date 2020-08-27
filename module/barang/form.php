@@ -8,6 +8,7 @@
     $gambar = "";
     $stok = "";
     $harga = "";
+    $harga_distributor = "";
     $brand = "";
     $status = "";
     $keterangan_gambar = "";
@@ -22,7 +23,8 @@
         $spesifikasi = $row['spesifikasi'];
         $gambar = $row['gambar'];
         $harga = $row['harga'];
-        $harga = $row['brand'];
+        $harga_distributor = $row['harga_distributor'];
+        $brand = $row['brand'];
         $stok = $row['stok'];
         $status = $row['status'];
         $button = "Update";
@@ -36,6 +38,14 @@
 <script src="<?php echo BASE_URL."js/ckeditor/ckeditor.js"; ?>"></script>
 
 <form action="<?php echo BASE_URL."module/barang/action.php?barang_id=$barang_id";?>" method="POST" enctype="multipart/form-data">
+
+    <?php
+
+        if ( isset($_GET['notif']) ) {
+            echo notifTransaksi($_GET['notif']);
+        }
+
+    ?>
 
     <div class="element-form">
         <label>Kategori</label>
@@ -75,6 +85,11 @@
     <div class="element-form">
         <label>Harga</label>
         <span><input type="text" name="harga" value="<?php echo $harga; ?>" /></span>
+    </div>
+
+    <div class="element-form">
+        <label>Harga Distributor</label>
+        <span><input type="text" name="harga_distributor" value="<?php echo $harga_distributor; ?>" /></span>
     </div>
 
     <div class="element-form">
