@@ -24,6 +24,20 @@
     </div>
 </div>
 
+<?php 
+    // Menyiapkan Query
+    $query = "SELECT stok FROM barang WHERE stok < 1";
+    // Eksekusi Query 
+    $sql = mysqli_query($koneksi, $query) OR die("Terdapat Error");
+
+    $result = mysqli_num_rows($sql);
+?>
+
+<?php if($result > 0) : ?>
+    <div class="notif" style="background-color: #e63636;">
+        Terdapat barang dengan stok yang menipis!
+    </div>
+<?php endif; ?>
 <?php
     // Cek jika var notif pada url tersedia
     if (isset($_GET['notif'])) {
@@ -66,20 +80,28 @@
                 <th class='kiri'>Harga</th>
                 <th class='kiri'>Harga Distributor</th>
                 <th class='kiri'>Brand</th>
+                <th class='kiri'>Stok</th>
                 <th class='tengah'>Status</th>
                 <th class='tengah'>Action</th>
               </tr>";
          
         $no=1 + $mulai_dari;
         while($row=mysqli_fetch_assoc($query)) {
+            
+            if ($row['stok'] < 1) {
+                $warning = "style='background-color: #e63636; color: white;'";
+            } else {
+                $warning = "";
+            }
 
-            echo "<tr>
+            echo "<tr {$warning}>
                     <td class='kolom-nomor'>$no</td>
                     <td class='kiri'>$row[nama_barang]</td>
                     <td class='kiri'>$row[kategori]</td>
                     <td class='kiri'>".rupiah($row["harga"])."</td>
                     <td class='kiri'>".rupiah($row["harga_distributor"])."</td>
                     <td class='kiri'>$row[brand]</td>
+                    <td class='kiri'>$row[stok]</td>
                     <td class='tengah'>$row[status]</td>
                     <td class='tengah'>
                         <a class='tombol-action' href='".BASE_URL."index.php?page=my_profile&module=barang&action=form&barang_id=$row[barang_id]'>Edit</a>

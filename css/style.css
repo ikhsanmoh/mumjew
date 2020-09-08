@@ -493,4 +493,13 @@ ul.pagination li a.active {
     text-align: right;
     margin-top: unset;
     color: #08a164;
+    color: #dd1212;
+}
+
+a.submit-my-profile {
+    color: white;
+    text-decoration: none;
+    background: #08a164;
+    padding: 5px 10px;
+    border-radius: 3px;
 }

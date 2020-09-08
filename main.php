@@ -53,7 +53,7 @@
                     $kategori_id = "AND barang.kategori_id='$kategori_id'";
                 }
                 
-            $query = mysqli_query($koneksi, "SELECT barang.*, kategori.kategori FROM barang JOIN kategori ON barang.kategori_id=kategori.kategori_id WHERE barang.status='on' $kategori_id ORDER BY rand() DESC ");
+            $query = mysqli_query($koneksi, "SELECT barang.*, kategori.kategori FROM barang JOIN kategori ON barang.kategori_id=kategori.kategori_id WHERE barang.status='on' AND barang.stok > 0 $kategori_id ORDER BY rand() DESC ");
                 
                 $no=1;
                 while($row=mysqli_fetch_assoc($query)){

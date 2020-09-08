@@ -60,7 +60,7 @@
             <?php
                  $keyword = $_GET["keyword"];
                  $semuadata=array();
-                 $ambil = $koneksi->query("SELECT * FROM barang WHERE nama_barang LIKE '%$keyword%' OR brand LIKE '%$keyword%'");
+                 $ambil = $koneksi->query("SELECT * FROM barang WHERE barang.status='on' AND barang.stok > 0 AND nama_barang LIKE '%$keyword%' OR brand LIKE '%$keyword%'");
                 
             ?>
             <div id="kanan" style="width: auto;">
