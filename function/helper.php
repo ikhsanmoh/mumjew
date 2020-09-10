@@ -120,4 +120,78 @@ function notifTransaksi($notifStatus = false, $ket = "Data") {
     return $hasil;
 }
 
+// Fungsi untuk merequest data pada web service dengan metode curl
+function curl_get($url) {
+    // Menginialisasi metode curl
+    $curl = curl_init();
+
+    // Set pengaturan curl
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+          "key: aeec1b4683f661b22e3702de11e30fe9"
+        ),
+      ));
+
+    // Eksekusi Curl
+    $reponse = curl_exec($curl);
+    // Catch kesalan Curl
+    $err = curl_error($curl);
+
+    // Tutup Curl
+    curl_close($curl);
+
+    // Cek Jika Request CURL Berhasil
+    if ($err) {
+        $response = false;
+    }
+
+    // Return Response dalam bentuk array
+    return json_decode($reponse, true);
+}
+
+// Fungsi untuk merequest data pada web service dengan metode curl
+function curl_post($url) {
+    // Menginialisasi metode curl
+    $curl = curl_init();
+
+    // Set pengaturan curl
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "origin=501&destination=114&weight=1700&courier=jne",
+        CURLOPT_HTTPHEADER => array(
+          "content-type: application/x-www-form-urlencoded",
+          "key: aeec1b4683f661b22e3702de11e30fe9"
+        ),
+    ));
+
+    // Eksekusi Curl
+    $reponse = curl_exec($curl);
+    // Catch kesalan Curl
+    $err = curl_error($curl);
+
+    // Tutup Curl
+    curl_close($curl);
+
+    // Cek Jika Request CURL Berhasil
+    if ($err) {
+        $response = false;
+    }
+
+    // Return Response dalam bentuk array
+    return json_decode($reponse, true);
+}
+
 ?>

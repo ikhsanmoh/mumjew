@@ -15,6 +15,9 @@
     $keranjang = isset($_SESSION['keranjang']) ? $_SESSION['keranjang'] : array();
     $totalBarang = count($keranjang);
 
+    // Menarik data API
+    $list_provinsi = curl_get('https://api.rajaongkir.com/starter/province');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -85,7 +88,12 @@
                     include_once("main.php");
                 }
             ?>
-        </div>    
+        </div>
+        
+        <div id="datacont">
+
+        </div>
+        
         <div id="footer">
             <p>copyright Mumtaza Jewerly 2020</p>
         </div>
@@ -108,7 +116,68 @@
 
 <script>
 
-  $('#notif').delay(3000).fadeOut(300);
+    // Menghilangkan Notif dalam interval waktu tertentu
+    $('#notif').delay(3000).fadeOut(300);
+
+    function get_ongkir($id_kota_tujuan) {
+        const xhr = new XMLHttpRequest();
+        var res;
+
+        // Get Ongkir - Response Handler
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+
+        // Get Ongkir - Set Request
+        xhr.open("GET", "request/get_ongkir.php", true);
+        xhr.send();
+    }
+
+    // Fungsi untuk mengcek ongkos kirim
+    function cek_ongkir() {
+        alert("Proses Cek Ongkir");
+        const xhr = new XMLHttpRequest();
+        const nama_provinsi_tujuan = document.querySelector('#kota_tujuan').value;
+        var res, id_kota_tujuan;
+
+
+        // Get id Kota - Response Handler
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                res = JSON.parse(this.responseText);
+                
+                // document.querySelector('#datacont').innerHTML = res.rajaongkir.results[0].province;
+                for(key in res.rajaongkir.results) {
+                    if (res.rajaongkir.results[key]['province'] == nama_provinsi_tujuan) {                 
+                        console.log(
+                            res.rajaongkir.results[key]['province_id'], 
+                            res.rajaongkir.results[key]['province']
+                        );
+                        id_kota_tujuan = res.rajaongkir.results[key]['province_id'];
+                    }
+                }
+
+                // Get ongkir
+                get_ongkir(id_kota_tujuan);
+            }
+        };
+
+        // Get id Kota - Set Request
+        xhr.open("GET", "request/get_list_provinsi.php", true);
+        xhr.send();
+    }
+
+    // function cek_jangkauan_kurir() {
+    //     alert('Berhasil');
+    // }
+
+//   function ubah_list_kota() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'https://kodepos-2d475.firebaseio.com/list_kotakab/.json')
+//     alert('Berhasil');
+//   }
 
 </script>
 

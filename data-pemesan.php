@@ -75,12 +75,20 @@
 
             <div class="element-form">
                 <label>Provinsi</label>
-                <span><input type="text" name="provinsi" value="<?php echo !empty($data_diri_baru) ? $data_diri_baru['provinsi'] : $provinsi; ?>" <?php echo $akses?>/></span>
+                <span><input type="text" id="provinsi_tujuan" name="provinsi" value="<?php echo !empty($data_diri_baru) ? $data_diri_baru['provinsi'] : $provinsi; ?>" list="data-provinsi" <?php echo $akses?>/></span>
             </div>
+            
+            <?php if(isset($list_provinsi) && is_array($list_provinsi)) : ?>
+                <datalist id="data-provinsi">
+                    <?php foreach ($list_provinsi['rajaongkir']['results'] as $key => $value) : ?>
+                        <option><?php echo $value['province'] ?></option>
+                    <?php endforeach; ?>
+                </datalist>
+            <?php endif; ?>
 
             <div class="element-form">
                 <label>Kota</label>
-                <span><input type="text" name="kota" value="<?php echo !empty($data_diri_baru) ? $data_diri_baru['kota'] : $kota; ?>" <?php echo $akses?>/></span>
+                <span><input type="text" id="kota_tujuan" name="kota" value="<?php echo !empty($data_diri_baru) ? $data_diri_baru['kota'] : $kota; ?>" <?php echo $akses?>/></span>
             </div>
 
             <div class="element-form">
@@ -96,7 +104,7 @@
             <div class="element-form">
             <?php if($edit == "on") : ?>
                 <span style="text-align: right">
-                    <input type="submit"  name="button" value="<?php echo $button; ?>" class="submit-my-profile" />
+                    <input type="submit" name="button" value="<?php echo $button; ?>" class="submit-my-profile" />
                     <!-- <a href="<?php //echo BASE_URL."index.php?page=data-pemesan&edit=off" ;?>" class="submit-my-profile"><?php //echo $button; ?></a> -->
                 </span>
             <?php else : ?>
@@ -105,30 +113,45 @@
                 </span>
             <?php endif; ?>
             </div>
-            
-            <!-- 
-            <div class="element-form">
-                <label>Kota</label>
-                <span>
-                    <select name="kota">
-                        <?php
-                            // $query = mysqli_query($koneksi, "SELECT * FROM kota");
 
-                            // while($row=mysqli_fetch_assoc($query)){
-                            //     echo "<option value='$row[kota_id]'>$row[kota] (".rupiah($row["tarif"]).")</option>";
-                            // }
-                        ?>
+            <span><hr></span>
+ 
+            <div class="element-form">
+                <label>Metode Pengiriman</label>
+                <span>
+                    <select name="metode_pengiriman" onchange="cek_ongkir(this.value)">
+                        <option value="kurir_mumtaza">Kurir Mumtaza</option>
+                        <option value="jne">JNE YES (<? //echo $ongkir['rajaongkir']['tarif'] ?>)</option>
+                        <option value="jne">JNE OKE</option>
+                        <option value="jne">JNE REG</option>
+                        <option value="tiki">TIKI</option>
                     </select>
+                    <!-- <input type="hidden" name="ongkir" value="35000"> -->
+
+                </span>
+            </div>
+
+            <!-- <div class="element-form">
+                <label>Ongkos Kirim</label>
+                <span>
+                    <input type="number" name="tarif" id="tarif" value="35000" readonly>
                 </span>
             </div> -->
 
             <div class="element-form">
                 <label>Metode Pembayaran</label>
                 <span>
-                    <input type="radio" name="metode_pembayaran" value="cod" />COD
-                    <input type="radio" name="metode_pembayaran" value="transfer" />Transfer
+                    <select name="metode_pembayaran">
+                        <option value="cod">Cash On Delivery (COD)</option>
+                        <option value="transfer">Transfer Bank</option>
+                        <option value="transfer">OVO</option>
+                        <option value="transfer">DANA</option>
+                    </select>
+                    <!-- <input type="radio" name="metode_pembayaran" value="cod" />COD
+                    <input type="radio" name="metode_pembayaran" value="transfer" />Transfer -->
                 </span>
             </div>
+
 
             <div class="element-form">
                 <span><input type="submit" value="submit"/></span>

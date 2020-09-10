@@ -1,25 +1,4 @@
-<?php
-    // Menginialisasi metode curl_provinsi
-    $curl_provinsi = curl_init();
-
-    curl_setopt_array($curl_provinsi, array(
-        CURLOPT_URL => 'https://kodepos-2d475.firebaseio.com/list_propinsi.json',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-    ));
-
-    $reponse = curl_exec($curl_provinsi);
-    $err = curl_error($curl_provinsi);
-
-    curl_close($curl_provinsi);
-
-    // Cek Jika Request CURL Berhasil
-    if ($err) {
-        echo "Curl Error";
-    } else {
-        $response = json_decode($reponse, true);
-    }
-      
+<?php 
     // $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : "";
     
     if (isset($_GET['edit']) && $_GET['edit'] == 'on') {
@@ -82,12 +61,12 @@
 
     <div class="element-form">
         <label>Provinsi</label>
-        <span><input type="text" name="provinsi" value="<?php echo $provinsi; ?>" list="data-provinsi" <?php echo $akses?>/></span>
+        <span><input type="text" id="input_provinsi" name="provinsi" value="<?php echo $provinsi; ?>" list="data-provinsi" onchange="ubah_list_kota()" <?php echo $akses?>/></span>
 
-        <?php if($response) : ?>
+        <?php if(isset($list_provinsi) && is_array($list_provinsi)) : ?>
             <datalist id="data-provinsi">
-                <?php foreach ($response as $key) : ?>
-                    <option><?php echo $key ?></option>
+                <?php foreach ($list_provinsi['rajaongkir']['results'] as $key => $value) : ?>
+                    <option><?php echo $value['province'] ?></option>
                 <?php endforeach; ?>
             </datalist>
         <?php endif; ?>
